@@ -1,137 +1,147 @@
 package com.paymeservice.android.model;
 
+import com.paymeservice.android.error.PayMeError;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+import java.io.IOException;
+
 /**
  * Created by loiho on 5/10/16.
  */
 public class PaySaleResponse {
-    private Integer statusCode;
-    private String paymeStatus;
-    private Integer statusErrorCode;
-    private String paymeSaleId;
-    private Integer paymeSaleCode;
-    private String saleCreated;
-    private String paymeSaleStatus;
-    private String saleStatus;
-    private String currency;
-    private String transactionId;
-    private Boolean isTokenSale;
-    private Integer price;
-    private String paymeSignature;
-    private String paymeTransactionId;
-    private String paymeTransactionTotal;
-    private String paymeTransactionCardBrand;
-    private String paymeTransactionAuthNumber;
-    private String buyerName;
-    private String buyerEmail;
-    private String buyerPhone;
-    private String buyerCardMask;
-    private String buyerCardExp;
-    private String buyerSocialId;
-    private Integer installments;
-    private String salePaidDate;
-    private String saleReleaseDate;
+  private Integer statusCode;
+  private String paymeStatus;
+  private Integer statusErrorCode;
+  private String paymeSaleId;
+  private Integer paymeSaleCode;
+  private String saleCreated;
+  private String paymeSaleStatus;
+  private String saleStatus;
+  private String currency;
+  private String transactionId;
+  private Boolean isTokenSale;
+  private Integer price;
+  private String paymeSignature;
+  private String paymeTransactionId;
+  private String paymeTransactionTotal;
+  private String paymeTransactionCardBrand;
+  private String paymeTransactionAuthNumber;
+  private String buyerName;
+  private String buyerEmail;
+  private String buyerPhone;
+  private String buyerCardMask;
+  private String buyerCardExp;
+  private String buyerSocialId;
+  private Integer installments;
+  private String salePaidDate;
+  private String saleReleaseDate;
 
-    public Integer getStatusCode() {
-        return statusCode;
-    }
+  public static PaySaleResponse fromJson(Moshi moshi, String json) throws IOException {
+    JsonAdapter<PaySaleResponse> adapter = moshi.adapter(PaySaleResponse.class);
+    return adapter.fromJson(json);
+  }
 
-    public String getPaymeStatus() {
-        return paymeStatus;
-    }
+  public Integer getStatusCode() {
+    return statusCode;
+  }
 
-    public Integer getStatusErrorCode() {
-        return statusErrorCode;
-    }
+  public String getPaymeStatus() {
+    return paymeStatus;
+  }
 
-    public String getPaymeSaleId() {
-        return paymeSaleId;
-    }
+  public Integer getStatusErrorCode() {
+    return statusErrorCode;
+  }
 
-    public Integer getPaymeSaleCode() {
-        return paymeSaleCode;
-    }
+  public String getPaymeSaleId() {
+    return paymeSaleId;
+  }
 
-    public String getSaleCreated() {
-        return saleCreated;
-    }
+  public Integer getPaymeSaleCode() {
+    return paymeSaleCode;
+  }
 
-    public String getPaymeSaleStatus() {
-        return paymeSaleStatus;
-    }
+  public String getSaleCreated() {
+    return saleCreated;
+  }
 
-    public String getSaleStatus() {
-        return saleStatus;
-    }
+  public String getPaymeSaleStatus() {
+    return paymeSaleStatus;
+  }
 
-    public String getCurrency() {
-        return currency;
-    }
+  public String getSaleStatus() {
+    return saleStatus;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getCurrency() {
+    return currency;
+  }
 
-    public Boolean getTokenSale() {
-        return isTokenSale;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public Integer getPrice() {
-        return price;
-    }
+  public Boolean getTokenSale() {
+    return isTokenSale;
+  }
 
-    public String getPaymeSignature() {
-        return paymeSignature;
-    }
+  public Integer getPrice() {
+    return price;
+  }
 
-    public String getPaymeTransactionId() {
-        return paymeTransactionId;
-    }
+  public String getPaymeSignature() {
+    return paymeSignature;
+  }
 
-    public String getPaymeTransactionTotal() {
-        return paymeTransactionTotal;
-    }
+  public String getPaymeTransactionId() {
+    return paymeTransactionId;
+  }
 
-    public String getPaymeTransactionCardBrand() {
-        return paymeTransactionCardBrand;
-    }
+  public String getPaymeTransactionTotal() {
+    return paymeTransactionTotal;
+  }
 
-    public String getPaymeTransactionAuthNumber() {
-        return paymeTransactionAuthNumber;
-    }
+  public String getPaymeTransactionCardBrand() {
+    return paymeTransactionCardBrand;
+  }
 
-    public String getBuyerName() {
-        return buyerName;
-    }
+  public String getPaymeTransactionAuthNumber() {
+    return paymeTransactionAuthNumber;
+  }
 
-    public String getBuyerEmail() {
-        return buyerEmail;
-    }
+  public String getBuyerName() {
+    return buyerName;
+  }
 
-    public String getBuyerPhone() {
-        return buyerPhone;
-    }
+  public String getBuyerEmail() {
+    return buyerEmail;
+  }
 
-    public String getBuyerCardMask() {
-        return buyerCardMask;
-    }
+  public String getBuyerPhone() {
+    return buyerPhone;
+  }
 
-    public String getBuyerCardExp() {
-        return buyerCardExp;
-    }
+  public String getBuyerCardMask() {
+    return buyerCardMask;
+  }
 
-    public String getBuyerSocialId() {
-        return buyerSocialId;
-    }
+  public String getBuyerCardExp() {
+    return buyerCardExp;
+  }
 
-    public Integer getInstallments() {
-        return installments;
-    }
+  public String getBuyerSocialId() {
+    return buyerSocialId;
+  }
 
-    public String getSalePaidDate() {
-        return salePaidDate;
-    }
+  public Integer getInstallments() {
+    return installments;
+  }
 
-    public String getSaleReleaseDate() {
-        return saleReleaseDate;
-    }
+  public String getSalePaidDate() {
+    return salePaidDate;
+  }
+
+  public String getSaleReleaseDate() {
+    return saleReleaseDate;
+  }
 }

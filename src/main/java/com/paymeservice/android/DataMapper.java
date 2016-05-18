@@ -1,13 +1,12 @@
 package com.paymeservice.android;
 
-import com.paymeservice.android.model.GenerateSaleRequest;
-import com.paymeservice.android.model.GenerateSaleResponse;
+import com.paymeservice.android.error.PayMeError;
 import com.paymeservice.android.model.PaySaleRequest;
 import com.paymeservice.android.model.PaySaleResponse;
-
+import com.paymeservice.android.model.PaySubscriptionRequest;
+import com.paymeservice.android.model.PaySubscriptionResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 /**
  * Created by loiho on 5/10/16.
@@ -15,88 +14,90 @@ import org.json.JSONObject;
  * The data mapping class
  */
 abstract class DataMapper {
-    private static final String EMPTY_STRING = "";
+  private static final String EMPTY_STRING = "";
 
-    public static JSONObject toJson(GenerateSaleRequest data) {
-        JSONObject json = new JSONObject();
+  public static JSONObject toJson(PaySaleRequest data) {
+    JSONObject json = new JSONObject();
 
-        try {
-            json.put(GenerateSaleRequest.Entry.SELLER_PAYME_ID, data.getSellerPaymeId());
-            json.put(GenerateSaleRequest.Entry.SALE_PRICE, data.getSalePrice());
-            json.put(GenerateSaleRequest.Entry.CURRENCY, data.getCurrency());
-            json.put(GenerateSaleRequest.Entry.PRODUCT_NAME, data.getProductName());
-            json.put(GenerateSaleRequest.Entry.TRANSACTION_ID, data.getTransactionId());
-            json.put(GenerateSaleRequest.Entry.INSTALLMENTS, data.getInstallments());
-            json.put(GenerateSaleRequest.Entry.LAYOUT, data.getLayout());
-            json.put(GenerateSaleRequest.Entry.SALE_CALLBACK_URL, data.getSaleCallbackUrl());
-            json.put(GenerateSaleRequest.Entry.SALE_RETURN_URL, data.getSaleReturnUrl());
-            json.put(GenerateSaleRequest.Entry.SALE_ERROR_URL, data.getSaleErrorUrl());
-            json.put(GenerateSaleRequest.Entry.SALE_CANCEL_URL, data.getSaleCancelUrl());
-            json.put(GenerateSaleRequest.Entry.CAPTURE_BUYER, data.getCaptureBuyer());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return json;
+    try {
+      json.put(PaySaleRequest.Entry.PAYME_SALE_ID, data.getPaymeSaleId());
+      json.put(PaySaleRequest.Entry.CREDIT_CARD_NUMBER, data.getCreditCardNumber());
+      json.put(PaySaleRequest.Entry.CREDIT_CARD_CVV, data.getCreditCardCVV());
+      json.put(PaySaleRequest.Entry.CREDIT_CARD_EXP, data.getCreditCardExp());
+      json.put(PaySaleRequest.Entry.BUYER_SOCIAL_ID, data.getBuyerSocialID());
+      json.put(PaySaleRequest.Entry.BUYER_EMAIL, data.getBuyerEmail());
+      json.put(PaySaleRequest.Entry.BUYER_NAME, data.getBuyerName());
+    } catch (JSONException e) {
+      e.printStackTrace();
     }
 
-    public static GenerateSaleResponse fromJson(JSONObject json) throws JSONException {
-        GenerateSaleResponse response = new GenerateSaleResponse();
-        response.setStatusCode(getInt(json, GenerateSaleResponse.Entry.STATUS_CODE));
-        response.setSaleUrl(getString(json, GenerateSaleResponse.Entry.SALE_URL));
-        response.setPaymeSaleId(getString(json, GenerateSaleResponse.Entry.PAYME_SALE_ID));
-        response.setPaymeSaleCode(getInt(json, GenerateSaleResponse.Entry.PAYME_SALE_CODE));
-        response.setPrice(getDouble(json, GenerateSaleResponse.Entry.PRICE));
-        response.setTransactionId(getString(json, GenerateSaleResponse.Entry.TRANSACTION_ID));
-        response.setCurrency(getString(json, GenerateSaleResponse.Entry.CURRENCY));
-        return response;
+    return json;
+  }
+
+  public static JSONObject toJson(PaySubscriptionRequest data) {
+    JSONObject json = new JSONObject();
+
+    try {
+      json.put(PaySubscriptionRequest.Entry.SUB_PAYME_ID, data.getSubPaymeId());
+      json.put(PaySubscriptionRequest.Entry.CREDIT_CARD_NUMBER, data.getCreditCardNumber());
+      json.put(PaySubscriptionRequest.Entry.CREDIT_CARD_EXP, data.getCreditCardExp());
+      json.put(PaySubscriptionRequest.Entry.CREDIT_CARD_CVV, data.getCreditCardCvv());
+      json.put(PaySubscriptionRequest.Entry.BUYER_NAME, data.getBuyerName());
+      json.put(PaySubscriptionRequest.Entry.BUYER_SOCIAL_ID, data.getBuyerSocialId());
+      json.put(PaySubscriptionRequest.Entry.BUYER_PHONE, data.getBuyerPhone());
+      json.put(PaySubscriptionRequest.Entry.BUYER_EMAIL, data.getBuyerEmail());
+    } catch (JSONException e) {
+      e.printStackTrace();
     }
 
-    public static JSONObject toJson(PaySaleRequest data) {
-        JSONObject json = new JSONObject();
+    return json;
+  }
 
-        try {
-            json.put(PaySaleRequest.Entry.PAYME_SALE_ID, data.getPaymeSaleId());
-            json.put(PaySaleRequest.Entry.CREDIT_CARD_NUMBER, data.getCreditCardNumber());
-            json.put(PaySaleRequest.Entry.CREDIT_CARD_CVV, data.getCreditCardCVV());
-            json.put(PaySaleRequest.Entry.CREDIT_CARD_EXP, data.getCreditCardExp());
-            json.put(PaySaleRequest.Entry.BUYER_SOCIAL_ID, data.getBuyerSocialID());
-            json.put(PaySaleRequest.Entry.BUYER_EMAIL, data.getBuyerEmail());
-            json.put(PaySaleRequest.Entry.BUYER_NAME, data.getBuyerName());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+  public static PaySubscriptionResponse paySubscriptionFromJson(JSONObject json) {
+    PaySubscriptionResponse response = new PaySubscriptionResponse();
+    return response;
+  }
 
-        return json;
+  public static PayMeError payMeErrorFromJson(JSONObject json) {
+    PayMeError payMeError = new PayMeError();
+    try {
+      payMeError.setStatusCode(getInt(json, PayMeError.Entry.STATUS_CODE));
+      payMeError.setStatusErrorDetails(getString(json, PayMeError.Entry.STATUS_ERROR_DETAILS));
+      payMeError.setStatusAdditionalInfo(getString(json, PayMeError.Entry.STATUS_ADDITIONAL_INFO));
+      payMeError.setStatusErrorCode(getInt(json, PayMeError.Entry.STATUS_ERROR_CODE));
+    } catch (JSONException e) {
+      e.printStackTrace();
     }
+    return payMeError;
+  }
 
-    public static PaySaleResponse paySaleFromJson(JSONObject json) {
-        PaySaleResponse paySaleResponse = new PaySaleResponse();
-        return paySaleResponse;
-    }
+  public static PaySaleResponse paySaleFromJson(JSONObject json) {
+    PaySaleResponse paySaleResponse = new PaySaleResponse();
+    return paySaleResponse;
+  }
 
-    public static String getString(JSONObject json, String key) throws JSONException {
-        if (json != null && json.has(key)) {
-            return json.getString(key);
-        }
-        return EMPTY_STRING;
+  public static String getString(JSONObject json, String key) throws JSONException {
+    if (json != null && json.has(key)) {
+      return json.getString(key);
     }
+    return EMPTY_STRING;
+  }
 
-    public static boolean getBoolean(JSONObject json, String key) throws JSONException {
-        return json != null && json.has(key) && json.getBoolean(key);
-    }
+  public static boolean getBoolean(JSONObject json, String key) throws JSONException {
+    return json != null && json.has(key) && json.getBoolean(key);
+  }
 
-    public static int getInt(JSONObject json, String key) throws JSONException {
-        if (json != null && json.has(key)) {
-            return json.getInt(key);
-        }
-        return 0;
+  public static int getInt(JSONObject json, String key) throws JSONException {
+    if (json != null && json.has(key)) {
+      return json.getInt(key);
     }
+    return 0;
+  }
 
-    public static Double getDouble(JSONObject json, String key) throws JSONException {
-        if (json != null && json.has(key)) {
-            return json.getDouble(key);
-        }
-        return null;
+  public static Double getDouble(JSONObject json, String key) throws JSONException {
+    if (json != null && json.has(key)) {
+      return json.getDouble(key);
     }
+    return null;
+  }
 }

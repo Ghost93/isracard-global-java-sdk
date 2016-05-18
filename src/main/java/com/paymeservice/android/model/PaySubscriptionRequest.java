@@ -15,13 +15,13 @@ public class PaySubscriptionRequest {
   }
 
   @Json(name = "sub_payme_id") String subPaymeId;
-  @Json(name = "credit_card_number") public String creditCardNumber;
-  @Json(name = "credit_card_exp") public String creditCardExp;
-  @Json(name = "credit_card_cvv") public String creditCardCVV;
-  @Json(name = "buyer_name") public String buyerName;
-  @Json(name = "buyer_social_id") public String buyerSocialId;
-  @Json(name = "buyer_phone") public String buyerPhone;
-  @Json(name = "buyer_email") public String buyerEmail;
+  @Json(name = "credit_card_number") String creditCardNumber;
+  @Json(name = "credit_card_exp") String creditCardExp;
+  @Json(name = "credit_card_cvv") String creditCardCVV;
+  @Json(name = "buyer_name") String buyerName;
+  @Json(name = "buyer_social_id") String buyerSocialId;
+  @Json(name = "buyer_phone") String buyerPhone;
+  @Json(name = "buyer_email") String buyerEmail;
 
   public String getSubPaymeId() {
     return subPaymeId;

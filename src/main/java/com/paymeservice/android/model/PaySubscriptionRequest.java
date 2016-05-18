@@ -1,29 +1,27 @@
 package com.paymeservice.android.model;
 
+import com.squareup.moshi.Json;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+
 /**
  * Created by LoiHo on 5/17/16.
  */
 public class PaySubscriptionRequest {
 
-  public static abstract class Entry {
-    public static final String SUB_PAYME_ID = "sub_payme_id";
-    public static final String CREDIT_CARD_NUMBER = "credit_card_number";
-    public static final String CREDIT_CARD_EXP = "credit_card_exp";
-    public static final String CREDIT_CARD_CVV = "credit_card_cvv";
-    public static final String BUYER_NAME = "buyer_name";
-    public static final String BUYER_SOCIAL_ID = "buyer_social_id";
-    public static final String BUYER_PHONE = "buyer_phone";
-    public static final String BUYER_EMAIL = "buyer_email";
+  public String toJson(Moshi moshi) {
+    JsonAdapter<PaySubscriptionRequest> adapter = moshi.adapter(PaySubscriptionRequest.class);
+    return adapter.toJson(this);
   }
 
-  public String subPaymeId;
-  public String creditCardNumber;
-  public String creditCardExp;
-  public String creditCardCvv;
-  public String buyerName;
-  public String buyerSocialId;
-  public String buyerPhone;
-  public String buyerEmail;
+  @Json(name = "sub_payme_id") String subPaymeId;
+  @Json(name = "credit_card_number") public String creditCardNumber;
+  @Json(name = "credit_card_exp") public String creditCardExp;
+  @Json(name = "credit_card_cvv") public String creditCardCVV;
+  @Json(name = "buyer_name") public String buyerName;
+  @Json(name = "buyer_social_id") public String buyerSocialId;
+  @Json(name = "buyer_phone") public String buyerPhone;
+  @Json(name = "buyer_email") public String buyerEmail;
 
   public String getSubPaymeId() {
     return subPaymeId;
@@ -49,12 +47,12 @@ public class PaySubscriptionRequest {
     this.creditCardExp = creditCardExp;
   }
 
-  public String getCreditCardCvv() {
-    return creditCardCvv;
+  public String getCreditCardCVV() {
+    return creditCardCVV;
   }
 
   public void setCreditCardCvv(String creditCardCvv) {
-    this.creditCardCvv = creditCardCvv;
+    this.creditCardCVV = creditCardCvv;
   }
 
   public String getBuyerName() {

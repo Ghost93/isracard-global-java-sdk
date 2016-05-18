@@ -1,29 +1,26 @@
 package com.paymeservice.android.model;
 
 import com.squareup.moshi.Json;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 
 /**
  * Created by loiho on 5/10/16.
  */
 public class PaySaleRequest {
 
-  public static abstract class Entry {
-    public static final String PAYME_SALE_ID = "payme_sale_id";
-    public static final String CREDIT_CARD_NUMBER = "credit_card_number";
-    public static final String CREDIT_CARD_CVV = "credit_card_cvv";
-    public static final String CREDIT_CARD_EXP = "credit_card_exp";
-    public static final String BUYER_SOCIAL_ID = "buyer_social_id";
-    public static final String BUYER_EMAIL = "buyer_email";
-    public static final String BUYER_NAME = "buyer_name";
+  public String toJson(Moshi moshi) {
+    JsonAdapter<PaySaleRequest> adapter = moshi.adapter(PaySaleRequest.class);
+    return adapter.toJson(this);
   }
 
-  private String paymeSaleId;
-  private String creditCardNumber;
-  private String creditCardCVV;
-  private String creditCardExp;
-  private String buyerSocialID;
-  private String buyerEmail;
-  private String buyerName;
+  @Json(name = "payme_sale_id") String paymeSaleId;
+  @Json(name = "credit_card_number") String creditCardNumber;
+  @Json(name = "credit_card_cvv") String creditCardCVV;
+  @Json(name = "credit_card_exp") String creditCardExp;
+  @Json(name = "buyer_social_id") String buyerSocialID;
+  @Json(name = "buyer_email") String buyerEmail;
+  @Json(name = "buyer_name") String buyerName;
 
   public String getPaymeSaleId() {
     return paymeSaleId;

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class PayMeError {
 
   @Json(name = "status_code") private int statusCode;
-  @Json(name = "status_additional_info") private String statusAdditionalInfo;
+  @Json(name = "status_additional_info") private Object statusAdditionalInfo;
   @Json(name = "status_error_code") private int statusErrorCode;
   @Json(name = "status_error_details") private String statusErrorDetails;
 
@@ -19,7 +19,6 @@ public class PayMeError {
     JsonAdapter<PayMeError> adapter = moshi.adapter(PayMeError.class);
     return adapter.fromJson(json);
   }
-
 
   public int getStatusCode() {
     return statusCode;
@@ -37,11 +36,11 @@ public class PayMeError {
     this.statusErrorDetails = statusErrorDetails;
   }
 
-  public String getStatusAdditionalInfo() {
+  public Object getStatusAdditionalInfo() {
     return statusAdditionalInfo;
   }
 
-  public void setStatusAdditionalInfo(String statusAdditionalInfo) {
+  public void setStatusAdditionalInfo(Object statusAdditionalInfo) {
     this.statusAdditionalInfo = statusAdditionalInfo;
   }
 

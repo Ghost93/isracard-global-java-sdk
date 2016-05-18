@@ -9,6 +9,12 @@ import java.io.IOException;
  * Created by LoiHo on 5/17/16.
  */
 public class PaySubscriptionResponse {
+
+  public static PaySubscriptionResponse fromJson(Moshi moshi, String json) throws IOException {
+    JsonAdapter<PaySubscriptionResponse> adapter = moshi.adapter(PaySubscriptionResponse.class);
+    return adapter.fromJson(json);
+  }
+
   @Json(name = "status_code") private Integer statusCode;
   @Json(name = "payme_status") private String paymeStatus;
   @Json(name = "status_error_code") private Integer statusErrorCode;
@@ -37,11 +43,6 @@ public class PaySubscriptionResponse {
   @Json(name = "buyer_phone") private String buyerPhone;
   @Json(name = "buyer_social_id") private String buyerSocialId;
 
-
-  public static PaySubscriptionResponse fromJson(Moshi moshi, String json) throws IOException {
-    JsonAdapter<PaySubscriptionResponse> adapter = moshi.adapter(PaySubscriptionResponse.class);
-    return adapter.fromJson(json);
-  }
   public Integer getStatusCode() {
     return statusCode;
   }

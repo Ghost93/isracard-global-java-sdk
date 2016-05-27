@@ -41,12 +41,12 @@ public class PayMe {
 
   PayMe(Settings settings) {
     this.settings = settings;
+    moshi = new Moshi.Builder().build();
 
     if (settings.getEnvironment() != Settings.Environment.PRODUCTION) {
       HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
       logging.setLevel(HttpLoggingInterceptor.Level.BODY);
       client = new OkHttpClient.Builder().addInterceptor(logging).build();
-      moshi = new Moshi.Builder().build();
     } else {
       client = new OkHttpClient();
     }

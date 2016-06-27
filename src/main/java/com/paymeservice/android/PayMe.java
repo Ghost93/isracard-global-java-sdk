@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Patterns;
 import com.paymeservice.android.error.PayMeError;
+import com.paymeservice.android.model.CaptureBuyerRequest;
+import com.paymeservice.android.model.CaptureBuyerResponse;
 import com.paymeservice.android.model.PaySaleRequest;
 import com.paymeservice.android.model.PaySaleResponse;
 import com.paymeservice.android.model.PaySubscriptionRequest;
@@ -31,6 +33,7 @@ public class PayMe {
   private static final String TAG = PayMe.class.getSimpleName();
   private static PayMe INSTANCE = null;
 
+  private static final String PATH_CAPTURE_BUYER = "/capture-buyer";
   private static final String PATH_PAY_SALE = "/pay-sale";
   private static final String PATH_PAY_SUBSCRIPTION = "/pay-subscription";
 
@@ -191,6 +194,57 @@ public class PayMe {
 
               final PaySubscriptionResponse saleResponse =
                   PaySubscriptionResponse.fromJson(INSTANCE.moshi, json);
+              if (saleResponse.getStatusCode() == 0) {
+                runOnUIThread(new Runnable() {
+                  @Override public void run() {
+                    listener.onSuccess(saleResponse);
+                  }
+                });
+                return;
+              }
+            }
+            final PayMeError error = PayMeError.fromJson(INSTANCE.moshi, json);
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new Exception(response.message()), error);
+              }
+            });
+          } catch (IOException e) {
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new IOException(), null);
+              }
+            });
+          }
+        }
+      }
+    });
+  }
+
+  public static void captureBuyer(CaptureBuyerRequest request,
+      final TransactionListener<CaptureBuyerResponse> listener) {
+    request.setSellerPaymeId(INSTANCE.settings.getSellerKey());
+    String content = request.toJson(INSTANCE.moshi);
+    Request httpRequest = INSTANCE.createRequest(PATH_CAPTURE_BUYER, content);
+    INSTANCE.client.newCall(httpRequest).enqueue(new Callback() {
+      @Override public void onFailure(Call call, final IOException e) {
+        if (listener != null) {
+          runOnUIThread(new Runnable() {
+            @Override public void run() {
+              listener.onFailed(e, null);
+            }
+          });
+        }
+      }
+
+      @Override public void onResponse(Call call, final Response response) throws IOException {
+        if (listener != null) {
+          try {
+            String json = response.body().string();
+            if (response.isSuccessful()) {
+
+              final CaptureBuyerResponse saleResponse =
+                  CaptureBuyerResponse.fromJson(INSTANCE.moshi, json);
               if (saleResponse.getStatusCode() == 0) {
                 runOnUIThread(new Runnable() {
                   @Override public void run() {

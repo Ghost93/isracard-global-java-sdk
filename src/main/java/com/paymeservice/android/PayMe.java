@@ -33,7 +33,7 @@ public class PayMe {
   private static final String TAG = PayMe.class.getSimpleName();
   private static PayMe INSTANCE = null;
 
-  private static final String PATH_CAPTURE_BUYER = "/capture-buyer";
+  private static final String PATH_CAPTURE_BUYER = "/capture-buyer-token";
   private static final String PATH_PAY_SALE = "/pay-sale";
   private static final String PATH_PAY_SUBSCRIPTION = "/pay-subscription";
 

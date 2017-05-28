@@ -21,6 +21,7 @@ public class PaySaleRequest {
   @Json(name = "buyer_social_id") String buyerSocialID;
   @Json(name = "buyer_email") String buyerEmail;
   @Json(name = "buyer_name") String buyerName;
+  @Json(name = "installments") String installments;
 
   public String getPaymeSaleId() {
     return paymeSaleId;
@@ -76,5 +77,13 @@ public class PaySaleRequest {
 
   public void setBuyerName(String buyerName) {
     this.buyerName = buyerName;
+  }
+
+  public String getInstallments() {
+    return installments;
+  }
+
+  public void setInstallments(String installments) {
+    this.installments = installments;
   }
 }

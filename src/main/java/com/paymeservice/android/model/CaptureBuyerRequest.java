@@ -21,7 +21,7 @@ public class CaptureBuyerRequest {
   @Json(name = "buyer_social_id") private String buyerSocialId;
   @Json(name = "buyer_email") private String buyerEmail;
   @Json(name = "buyer_phone") private String buyerPhone;
-  @Json(name = "payme_client_key") private String paymeClientKey;
+  @Json(name = "buyer_is_permanent") private Boolean buyerIsPermanent = false;
 
   public String getSellerPaymeId() {
     return sellerPaymeId;
@@ -55,8 +55,8 @@ public class CaptureBuyerRequest {
     return buyerPhone;
   }
 
-  public String getPaymeClientKey() {
-    return paymeClientKey;
+  public Boolean getBuyerIsPermanent() {
+    return buyerIsPermanent;
   }
 
   public void setCreditCardNumber(String creditCardNumber) {
@@ -87,8 +87,8 @@ public class CaptureBuyerRequest {
     this.buyerPhone = buyerPhone;
   }
 
-  public void setPaymeClientKey(String paymeClientKey) {
-    this.paymeClientKey = paymeClientKey;
+  public void setBuyerIsPermanent(Boolean buyerIsPermanent) {
+    this.buyerIsPermanent = buyerIsPermanent;
   }
 
   public void setSellerPaymeId(String sellerPaymeId) {

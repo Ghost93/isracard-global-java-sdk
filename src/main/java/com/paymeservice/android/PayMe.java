@@ -6,6 +6,10 @@ import android.util.Patterns;
 import com.paymeservice.android.error.PayMeError;
 import com.paymeservice.android.model.CaptureBuyerRequest;
 import com.paymeservice.android.model.CaptureBuyerResponse;
+import com.paymeservice.android.model.GenerateSaleRequest;
+import com.paymeservice.android.model.GenerateSaleResponse;
+import com.paymeservice.android.model.GetFinancialTransactionsRequest;
+import com.paymeservice.android.model.GetFinancialTransactionsResponse;
 import com.paymeservice.android.model.PaySaleRequest;
 import com.paymeservice.android.model.PaySaleResponse;
 import com.paymeservice.android.model.PaySubscriptionRequest;
@@ -35,7 +39,9 @@ public class PayMe {
 
   private static final String PATH_CAPTURE_BUYER = "/capture-buyer-token";
   private static final String PATH_PAY_SALE = "/pay-sale";
+  private static final String PATH_GENERATE_SALE = "/generate-sale";
   private static final String PATH_PAY_SUBSCRIPTION = "/pay-subscription";
+  private static final String PATH_GET_FINANSIAL_TRANSACTIONS = "/get-financial-transactions";
 
   private Settings settings;
   private OkHttpClient client;
@@ -104,6 +110,61 @@ public class PayMe {
    */
   public static void destroyInstance() {
     INSTANCE = null;
+  }
+
+  /**
+   * Generate sale
+   *
+   * @param request the json body.
+   * @param listener call back.
+   */
+  public static void generateSale(GenerateSaleRequest request,
+                             final TransactionListener<GenerateSaleResponse> listener) {
+    request.setSellerPaymeId(INSTANCE.settings.getSellerKey());
+    String content = request.toJson(INSTANCE.moshi);
+    Request httpRequest = INSTANCE.createRequest(PATH_GENERATE_SALE, content);
+    INSTANCE.client.newCall(httpRequest).enqueue(new Callback() {
+      @Override public void onFailure(Call call, final IOException e) {
+        if (listener != null) {
+          runOnUIThread(new Runnable() {
+            @Override public void run() {
+              listener.onFailed(e, null);
+            }
+          });
+        }
+      }
+
+      @Override public void onResponse(Call call, final Response response) throws IOException {
+        if (listener != null) {
+          try {
+            String json = response.body().string();
+            if (response.isSuccessful()) {
+              final GenerateSaleResponse saleResponse = GenerateSaleResponse.fromJson(INSTANCE.moshi, json);
+              if (saleResponse.getStatusCode() == 0) {
+                runOnUIThread(new Runnable() {
+                  @Override public void run() {
+                    listener.onSuccess(saleResponse);
+                  }
+                });
+                return;
+              }
+            }
+            final PayMeError error = PayMeError.fromJson(INSTANCE.moshi, json);
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new Exception(response.message()), error);
+              }
+            });
+          } catch (IOException e) {
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new IOException(), null);
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   /**
@@ -249,6 +310,57 @@ public class PayMe {
                 runOnUIThread(new Runnable() {
                   @Override public void run() {
                     listener.onSuccess(saleResponse);
+                  }
+                });
+                return;
+              }
+            }
+            final PayMeError error = PayMeError.fromJson(INSTANCE.moshi, json);
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new Exception(response.message()), error);
+              }
+            });
+          } catch (IOException e) {
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new IOException(), null);
+              }
+            });
+          }
+        }
+      }
+    });
+  }
+
+  public static void getFinancialTransactions(GetFinancialTransactionsRequest request,
+                                  final TransactionListener<GetFinancialTransactionsResponse> listener) {
+    request.setSellerPaymeId(INSTANCE.settings.getSellerKey());
+    String content = request.toJson(INSTANCE.moshi);
+    Request httpRequest = INSTANCE.createRequest(PATH_GET_FINANSIAL_TRANSACTIONS, content);
+    INSTANCE.client.newCall(httpRequest).enqueue(new Callback() {
+      @Override public void onFailure(Call call, final IOException e) {
+        if (listener != null) {
+          runOnUIThread(new Runnable() {
+            @Override public void run() {
+              listener.onFailed(e, null);
+            }
+          });
+        }
+      }
+
+      @Override public void onResponse(Call call, final Response response) throws IOException {
+        if (listener != null) {
+          try {
+            String json = response.body().string();
+            if (response.isSuccessful()) {
+
+              final GetFinancialTransactionsResponse transactionResponse =
+                      GetFinancialTransactionsResponse.fromJson(INSTANCE.moshi, json);
+              if (transactionResponse.getStatusCode() == 0) {
+                runOnUIThread(new Runnable() {
+                  @Override public void run() {
+                    listener.onSuccess(transactionResponse);
                   }
                 });
                 return;

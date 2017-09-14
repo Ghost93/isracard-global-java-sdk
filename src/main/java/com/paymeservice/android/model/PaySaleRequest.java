@@ -19,8 +19,9 @@ public class PaySaleRequest {
   @Json(name = "credit_card_cvv") String creditCardCVV;
   @Json(name = "credit_card_exp") String creditCardExp;
   @Json(name = "buyer_social_id") String buyerSocialID;
-  @Json(name = "buyer_email") String buyerEmail;
   @Json(name = "buyer_name") String buyerName;
+  @Json(name = "buyer_phone") String buyerPhone;
+  @Json(name = "buyer_email") String buyerEmail;
   @Json(name = "installments") String installments;
 
   public String getPaymeSaleId() {
@@ -77,6 +78,14 @@ public class PaySaleRequest {
 
   public void setBuyerName(String buyerName) {
     this.buyerName = buyerName;
+  }
+
+  public String getBuyerPhone() {
+    return buyerPhone;
+  }
+
+  public void setBuyerPhone(String buyerPhone) {
+    this.buyerPhone = buyerPhone;
   }
 
   public String getInstallments() {

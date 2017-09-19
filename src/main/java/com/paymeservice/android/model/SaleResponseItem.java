@@ -1,13 +1,23 @@
 package com.paymeservice.android.model;
 
+import android.support.annotation.Keep;
+
 import com.squareup.moshi.Json;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+
+import java.io.IOException;
 
 /**
  * Created by grang on 13/09/2017.
  */
 
-class SalesResponseItem {
-
+@Keep
+public class SaleResponseItem {
+    public static SaleResponseItem fromJson(Moshi moshi, String json) throws IOException {
+        JsonAdapter<SaleResponseItem> adapter = moshi.adapter(SaleResponseItem.class);
+        return adapter.fromJson(json);
+    }
     @Json(name = "seller_payme_id") private String sellerPaymeId;
     @Json(name = "seller_id") private String sellerId;
     @Json(name = "sale_payme_id") private String salePaymeId;

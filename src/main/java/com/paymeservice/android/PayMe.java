@@ -10,8 +10,12 @@ import com.paymeservice.android.model.GenerateSaleRequest;
 import com.paymeservice.android.model.GenerateSaleResponse;
 import com.paymeservice.android.model.GetFinancialTransactionsRequest;
 import com.paymeservice.android.model.GetFinancialTransactionsResponse;
+import com.paymeservice.android.model.GetGraphPoints.GetGraphPointsRequest;
+import com.paymeservice.android.model.GetGraphPoints.GetGraphPointsResponse;
 import com.paymeservice.android.model.GetSalesRequest;
 import com.paymeservice.android.model.GetSalesResponse;
+import com.paymeservice.android.model.GetStatistics.GetStatisticsRequest;
+import com.paymeservice.android.model.GetStatistics.GetStatisticsResponse;
 import com.paymeservice.android.model.PaySaleRequest;
 import com.paymeservice.android.model.PaySaleResponse;
 import com.paymeservice.android.model.PaySubscriptionRequest;
@@ -43,8 +47,10 @@ public class PayMe {
   private static final String PATH_PAY_SALE = "/pay-sale";
   private static final String PATH_GENERATE_SALE = "/generate-sale";
   private static final String PATH_PAY_SUBSCRIPTION = "/pay-subscription";
-  private static final String PATH_GET_FINANSIAL_TRANSACTIONS = "/get-financial-transactions";
+  private static final String PATH_GET_FINANCIAL_TRANSACTIONS = "/get-financial-transactions";
   private static final String PATH_GET_SALES = "/get-sales";
+  private static final String PATH_GET_STATISTICS = "/get-statistics";
+  private static final String PATH_GET_GRAPH_POINTS = "/get-graph-points";
 
   private Settings settings;
   private OkHttpClient client;
@@ -340,7 +346,7 @@ public class PayMe {
                                   final TransactionListener<GetFinancialTransactionsResponse> listener) {
     request.setSellerPaymeId(INSTANCE.settings.getSellerKey());
     String content = request.toJson(INSTANCE.moshi);
-    Request httpRequest = INSTANCE.createRequest(PATH_GET_FINANSIAL_TRANSACTIONS, content);
+    Request httpRequest = INSTANCE.createRequest(PATH_GET_FINANCIAL_TRANSACTIONS, content);
     INSTANCE.client.newCall(httpRequest).enqueue(new Callback() {
       @Override public void onFailure(Call call, final IOException e) {
         if (listener != null) {
@@ -415,6 +421,108 @@ public class PayMe {
                 runOnUIThread(new Runnable() {
                   @Override public void run() {
                     listener.onSuccess(salesResponse);
+                  }
+                });
+                return;
+              }
+            }
+            final PayMeError error = PayMeError.fromJson(INSTANCE.moshi, json);
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new Exception(response.message()), error);
+              }
+            });
+          } catch (IOException e) {
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new IOException(), null);
+              }
+            });
+          }
+        }
+      }
+    });
+  }
+
+  public static void getStatistics(GetStatisticsRequest request,
+                              final TransactionListener<GetStatisticsResponse> listener) {
+    request.setSellerPaymeId(INSTANCE.settings.getSellerKey());
+    String content = request.toJson(INSTANCE.moshi);
+    Request httpRequest = INSTANCE.createRequest(PATH_GET_STATISTICS, content);
+    INSTANCE.client.newCall(httpRequest).enqueue(new Callback() {
+      @Override public void onFailure(Call call, final IOException e) {
+        if (listener != null) {
+          runOnUIThread(new Runnable() {
+            @Override public void run() {
+              listener.onFailed(e, null);
+            }
+          });
+        }
+      }
+
+      @Override public void onResponse(Call call, final Response response) throws IOException {
+        if (listener != null) {
+          try {
+            String json = response.body().string();
+            if (response.isSuccessful()) {
+
+              final GetStatisticsResponse statisticsResponse =
+                      GetStatisticsResponse.fromJson(INSTANCE.moshi, json);
+              if (statisticsResponse.getStatusCode() == 0) {
+                runOnUIThread(new Runnable() {
+                  @Override public void run() {
+                    listener.onSuccess(statisticsResponse);
+                  }
+                });
+                return;
+              }
+            }
+            final PayMeError error = PayMeError.fromJson(INSTANCE.moshi, json);
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new Exception(response.message()), error);
+              }
+            });
+          } catch (IOException e) {
+            runOnUIThread(new Runnable() {
+              @Override public void run() {
+                listener.onFailed(new IOException(), null);
+              }
+            });
+          }
+        }
+      }
+    });
+  }
+
+  public static void getGraphPoinsts(GetGraphPointsRequest request,
+                                   final TransactionListener<GetGraphPointsResponse> listener) {
+    request.setSellerPaymeId(INSTANCE.settings.getSellerKey());
+    String content = request.toJson(INSTANCE.moshi);
+    Request httpRequest = INSTANCE.createRequest(PATH_GET_GRAPH_POINTS, content);
+    INSTANCE.client.newCall(httpRequest).enqueue(new Callback() {
+      @Override public void onFailure(Call call, final IOException e) {
+        if (listener != null) {
+          runOnUIThread(new Runnable() {
+            @Override public void run() {
+              listener.onFailed(e, null);
+            }
+          });
+        }
+      }
+
+      @Override public void onResponse(Call call, final Response response) throws IOException {
+        if (listener != null) {
+          try {
+            String json = response.body().string();
+            if (response.isSuccessful()) {
+
+              final GetGraphPointsResponse graphPointsResponse =
+                      GetGraphPointsResponse.fromJson(INSTANCE.moshi, json);
+              if (graphPointsResponse.getStatusCode() == 0) {
+                runOnUIThread(new Runnable() {
+                  @Override public void run() {
+                    listener.onSuccess(graphPointsResponse);
                   }
                 });
                 return;

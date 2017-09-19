@@ -18,7 +18,7 @@ public class GetSalesResponse {
     }
     @Json(name = "status_code") private Integer statusCode;
     @Json(name = "items_count") private Integer itemsCount;
-    @Json(name = "items") private List<SalesResponseItem> items;
+    @Json(name = "items") private List<SaleResponseItem> items;
 
     public Integer getStatusCode() {
         return statusCode;
@@ -29,7 +29,7 @@ public class GetSalesResponse {
         return itemsCount;
     }
 
-    public List<SalesResponseItem> getItems() {
+    public List<SaleResponseItem> getItems() {
         return items;
     }
 }

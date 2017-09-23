@@ -28,7 +28,12 @@ public class GetStatisticsResponse {
     return endDate;
   }
 
+  public StatisticsCurrencies getCurrencies() {
+    return currencies;
+  }
+
   public Integer getStatusCode() {
     return statusCode;
   }
+
 }

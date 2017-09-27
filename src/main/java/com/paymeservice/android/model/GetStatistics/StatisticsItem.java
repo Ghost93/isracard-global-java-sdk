@@ -23,7 +23,7 @@ public class StatisticsItem {
     @Json(name = "sum") private Long sum;
     @Json(name = "count") private Integer count;
     @Json(name = "average") private Long average;
-    @Json(name = "percentage") private Integer  percentage;
+    @Json(name = "percentage") private Double  percentage;
 
     public Long getSum() {
         return sum;
@@ -37,7 +37,7 @@ public class StatisticsItem {
         return average;
     }
 
-    public Integer getPercentage() {
+    public Double getPercentage() {
         return percentage;
     }
 }

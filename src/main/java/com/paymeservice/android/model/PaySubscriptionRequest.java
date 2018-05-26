@@ -4,9 +4,7 @@ import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
-/**
- * Created by LoiHo on 5/17/16.
- */
+/** Created by LoiHo on 5/17/16. */
 public class PaySubscriptionRequest {
 
   public String toJson(Moshi moshi) {
@@ -14,14 +12,29 @@ public class PaySubscriptionRequest {
     return adapter.toJson(this);
   }
 
-  @Json(name = "sub_payme_id") String subPaymeId;
-  @Json(name = "credit_card_number") String creditCardNumber;
-  @Json(name = "credit_card_exp") String creditCardExp;
-  @Json(name = "credit_card_cvv") String creditCardCVV;
-  @Json(name = "buyer_name") String buyerName;
-  @Json(name = "buyer_social_id") String buyerSocialId;
-  @Json(name = "buyer_phone") String buyerPhone;
-  @Json(name = "buyer_email") String buyerEmail;
+  @Json(name = "sub_payme_id")
+  String subPaymeId;
+
+  @Json(name = "credit_card_number")
+  String creditCardNumber;
+
+  @Json(name = "credit_card_exp")
+  String creditCardExp;
+
+  @Json(name = "credit_card_cvv")
+  String creditCardCVV;
+
+  @Json(name = "buyer_name")
+  String buyerName;
+
+  @Json(name = "buyer_social_id")
+  String buyerSocialId;
+
+  @Json(name = "buyer_phone")
+  String buyerPhone;
+
+  @Json(name = "buyer_email")
+  String buyerEmail;
 
   public String getSubPaymeId() {
     return subPaymeId;

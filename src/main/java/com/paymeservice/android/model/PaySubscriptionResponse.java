@@ -5,9 +5,7 @@ import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import java.io.IOException;
 
-/**
- * Created by LoiHo on 5/17/16.
- */
+/** Created by LoiHo on 5/17/16. */
 public class PaySubscriptionResponse {
 
   public static PaySubscriptionResponse fromJson(Moshi moshi, String json) throws IOException {
@@ -15,33 +13,86 @@ public class PaySubscriptionResponse {
     return adapter.fromJson(json);
   }
 
-  @Json(name = "status_code") Integer statusCode;
-  @Json(name = "payme_status") String paymeStatus;
-  @Json(name = "status_error_code") Integer statusErrorCode;
-  @Json(name = "seller_payme_id") String sellerPaymeId;
-  @Json(name = "seller_id") String sellerId;
-  @Json(name = "sub_payme_id") String subPaymeId;
-  @Json(name = "sub_payme_code") Integer subPaymeCode;
-  @Json(name = "sub_created") String subCreated;
-  @Json(name = "sub_start_date") String subStartDate;
-  @Json(name = "sub_prev_date") Object subPrevDate;
-  @Json(name = "sub_next_date") String subNextDate;
-  @Json(name = "sub_status") Integer subStatus;
-  @Json(name = "sub_iteration_type") Integer subIterationType;
-  @Json(name = "sub_currency") String subCurrency;
-  @Json(name = "sub_price") Integer subPrice;
-  @Json(name = "sub_description") String subDescription;
-  @Json(name = "sub_iterations") Integer subIterations;
-  @Json(name = "sub_iterations_completed") Integer subIterationsCompleted;
-  @Json(name = "sub_iterations_left") Integer subIterationsLeft;
-  @Json(name = "sub_paid") Boolean subPaid;
-  @Json(name = "sub_error_text") Object subErrorText;
-  @Json(name = "sub_payment_date") String subPaymentDate;
-  @Json(name = "buyer_card_mask") String buyerCardMask;
-  @Json(name = "buyer_name") String buyerName;
-  @Json(name = "buyer_email") String buyerEmail;
-  @Json(name = "buyer_phone") String buyerPhone;
-  @Json(name = "buyer_social_id") String buyerSocialId;
+  @Json(name = "status_code")
+  Integer statusCode;
+
+  @Json(name = "payme_status")
+  String paymeStatus;
+
+  @Json(name = "status_error_code")
+  Integer statusErrorCode;
+
+  @Json(name = "seller_payme_id")
+  String sellerPaymeId;
+
+  @Json(name = "seller_id")
+  String sellerId;
+
+  @Json(name = "sub_payme_id")
+  String subPaymeId;
+
+  @Json(name = "sub_payme_code")
+  Integer subPaymeCode;
+
+  @Json(name = "sub_created")
+  String subCreated;
+
+  @Json(name = "sub_start_date")
+  String subStartDate;
+
+  @Json(name = "sub_prev_date")
+  Object subPrevDate;
+
+  @Json(name = "sub_next_date")
+  String subNextDate;
+
+  @Json(name = "sub_status")
+  Integer subStatus;
+
+  @Json(name = "sub_iteration_type")
+  Integer subIterationType;
+
+  @Json(name = "sub_currency")
+  String subCurrency;
+
+  @Json(name = "sub_price")
+  Integer subPrice;
+
+  @Json(name = "sub_description")
+  String subDescription;
+
+  @Json(name = "sub_iterations")
+  Integer subIterations;
+
+  @Json(name = "sub_iterations_completed")
+  Integer subIterationsCompleted;
+
+  @Json(name = "sub_iterations_left")
+  Integer subIterationsLeft;
+
+  @Json(name = "sub_paid")
+  Boolean subPaid;
+
+  @Json(name = "sub_error_text")
+  Object subErrorText;
+
+  @Json(name = "sub_payment_date")
+  String subPaymentDate;
+
+  @Json(name = "buyer_card_mask")
+  String buyerCardMask;
+
+  @Json(name = "buyer_name")
+  String buyerName;
+
+  @Json(name = "buyer_email")
+  String buyerEmail;
+
+  @Json(name = "buyer_phone")
+  String buyerPhone;
+
+  @Json(name = "buyer_social_id")
+  String buyerSocialId;
 
   public Integer getStatusCode() {
     return statusCode;

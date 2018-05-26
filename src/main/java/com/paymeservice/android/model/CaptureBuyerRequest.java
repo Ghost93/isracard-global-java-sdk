@@ -4,24 +4,39 @@ import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
-/**
- * Created by LoiHo on 6/27/16.
- */
+/** Created by LoiHo on 6/27/16. */
 public class CaptureBuyerRequest {
   public String toJson(Moshi moshi) {
     JsonAdapter<CaptureBuyerRequest> adapter = moshi.adapter(CaptureBuyerRequest.class);
     return adapter.toJson(this);
   }
 
-  @Json(name = "seller_payme_id") private String sellerPaymeId;
-  @Json(name = "credit_card_number") private String creditCardNumber;
-  @Json(name = "credit_card_exp") private String creditCardExp;
-  @Json(name = "credit_card_cvv") private String creditCardCvv;
-  @Json(name = "buyer_name") private String buyerName;
-  @Json(name = "buyer_social_id") private String buyerSocialId;
-  @Json(name = "buyer_email") private String buyerEmail;
-  @Json(name = "buyer_phone") private String buyerPhone;
-  @Json(name = "buyer_is_permanent") private Boolean buyerIsPermanent = false;
+  @Json(name = "seller_payme_id")
+  private String sellerPaymeId;
+
+  @Json(name = "credit_card_number")
+  private String creditCardNumber;
+
+  @Json(name = "credit_card_exp")
+  private String creditCardExp;
+
+  @Json(name = "credit_card_cvv")
+  private String creditCardCvv;
+
+  @Json(name = "buyer_name")
+  private String buyerName;
+
+  @Json(name = "buyer_social_id")
+  private String buyerSocialId;
+
+  @Json(name = "buyer_email")
+  private String buyerEmail;
+
+  @Json(name = "buyer_phone")
+  private String buyerPhone;
+
+  @Json(name = "buyer_is_permanent")
+  private Boolean buyerIsPermanent = false;
 
   public String getSellerPaymeId() {
     return sellerPaymeId;
@@ -93,6 +108,5 @@ public class CaptureBuyerRequest {
 
   public void setSellerPaymeId(String sellerPaymeId) {
     this.sellerPaymeId = sellerPaymeId;
-
   }
 }

@@ -1,92 +1,102 @@
 package com.paymeservice.android.model;
 
-import android.util.Log;
-
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
-/**
- * Created by grang on 13/09/2017.
- */
-
+/** Created by grang on 13/09/2017. */
 public class GetFinancialTransactionsRequest {
-    public String toJson(Moshi moshi) {
-        JsonAdapter<GetFinancialTransactionsRequest> adapter = moshi.adapter(GetFinancialTransactionsRequest.class);
-        return adapter.toJson(this);
-    }
+  public String toJson(Moshi moshi) {
+    JsonAdapter<GetFinancialTransactionsRequest> adapter =
+        moshi.adapter(GetFinancialTransactionsRequest.class);
+    return adapter.toJson(this);
+  }
 
-    @Json(name = "seller_payme_id") private String sellerPaymeId;
-    @Json(name = "seller_id") private String sellerId;
-    @Json(name = "tran_created") private String tranCreated;
-    @Json(name = "tran_created_min") private String tranCreatedMin;
-    @Json(name = "tran_created_max") private String tranCreatedMax;
-    @Json(name = "tran_type") private Integer tranType;
-    @Json(name = "tran_total") private Long tranTotal;
-    @Json(name = "tran_currency") private String tranCurrency;
+  @Json(name = "seller_payme_id")
+  private String sellerPaymeId;
 
+  @Json(name = "seller_id")
+  private String sellerId;
 
-    public String getSellerPaymeId() {
-        return sellerPaymeId;
-    }
+  @Json(name = "tran_created")
+  private String tranCreated;
 
-    public void setSellerPaymeId(String sellerPaymeId) {
-        this.sellerPaymeId = sellerPaymeId;
-    }
+  @Json(name = "tran_created_min")
+  private String tranCreatedMin;
 
-    public String getSellerId() {
-        return sellerId;
-    }
+  @Json(name = "tran_created_max")
+  private String tranCreatedMax;
 
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
-    }
+  @Json(name = "tran_type")
+  private Integer tranType;
 
-    public String getTranCreated() {
-        return tranCreated;
-    }
+  @Json(name = "tran_total")
+  private Long tranTotal;
 
-    public void setTranCreated(String tranCreated) {
-        this.tranCreated = tranCreated;
-    }
+  @Json(name = "tran_currency")
+  private String tranCurrency;
 
-    public String getTranCreatedMin() {
-        return tranCreatedMin;
-    }
+  public String getSellerPaymeId() {
+    return sellerPaymeId;
+  }
 
-    public void setTranCreatedMin(String tranCreatedMin) {
-        this.tranCreatedMin = tranCreatedMin;
-    }
+  public void setSellerPaymeId(String sellerPaymeId) {
+    this.sellerPaymeId = sellerPaymeId;
+  }
 
-    public String getTranCreatedMax() {
-        return tranCreatedMax;
-    }
+  public String getSellerId() {
+    return sellerId;
+  }
 
-    public void setTranCreatedMax(String tranCreatedMax) {
-        this.tranCreatedMax = tranCreatedMax;
-    }
+  public void setSellerId(String sellerId) {
+    this.sellerId = sellerId;
+  }
 
-    public Integer getTranType() {
-        return tranType;
-    }
+  public String getTranCreated() {
+    return tranCreated;
+  }
 
-    public void setTranType(Integer tranType) {
-        this.tranType = tranType;
-    }
+  public void setTranCreated(String tranCreated) {
+    this.tranCreated = tranCreated;
+  }
 
-    public Long getTranTotal() {
-        return tranTotal;
-    }
+  public String getTranCreatedMin() {
+    return tranCreatedMin;
+  }
 
-    public void setTranTotal(Long tranTotal) {
-        this.tranTotal = tranTotal;
-    }
+  public void setTranCreatedMin(String tranCreatedMin) {
+    this.tranCreatedMin = tranCreatedMin;
+  }
 
-    public String getTranCurrency() {
-        return tranCurrency;
-    }
+  public String getTranCreatedMax() {
+    return tranCreatedMax;
+  }
 
-    public void setTranCurrency(String tranCurrency) {
-        this.tranCurrency = tranCurrency;
-    }
+  public void setTranCreatedMax(String tranCreatedMax) {
+    this.tranCreatedMax = tranCreatedMax;
+  }
+
+  public Integer getTranType() {
+    return tranType;
+  }
+
+  public void setTranType(Integer tranType) {
+    this.tranType = tranType;
+  }
+
+  public Long getTranTotal() {
+    return tranTotal;
+  }
+
+  public void setTranTotal(Long tranTotal) {
+    this.tranTotal = tranTotal;
+  }
+
+  public String getTranCurrency() {
+    return tranCurrency;
+  }
+
+  public void setTranCurrency(String tranCurrency) {
+    this.tranCurrency = tranCurrency;
+  }
 }

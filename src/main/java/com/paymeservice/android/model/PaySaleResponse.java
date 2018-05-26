@@ -5,9 +5,7 @@ import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import java.io.IOException;
 
-/**
- * Created by loiho on 5/10/16.
- */
+/** Created by loiho on 5/10/16. */
 public class PaySaleResponse {
 
   public static PaySaleResponse fromJson(Moshi moshi, String json) throws IOException {
@@ -15,32 +13,83 @@ public class PaySaleResponse {
     return adapter.fromJson(json);
   }
 
-  @Json(name = "status_code") Integer statusCode;
-  @Json(name = "payme_status") String paymeStatus;
-  @Json(name = "status_error_code") Integer statusErrorCode;
-  @Json(name = "payme_sale_id") String paymeSaleId;
-  @Json(name = "payme_sale_code") Integer paymeSaleCode;
-  @Json(name = "sale_created") String saleCreated;
-  @Json(name = "payme_sale_status") String paymeSaleStatus;
-  @Json(name = "sale_status") String saleStatus;
-  @Json(name = "currency") String currency;
-  @Json(name = "transaction_id") String transactionId;
-  @Json(name = "is_token_sale") Boolean isTokenSale;
-  @Json(name = "price") Integer price;
-  @Json(name = "payme_signature") String paymeSignature;
-  @Json(name = "payme_transaction_id") String paymeTransactionId;
-  @Json(name = "payme_transaction_total") String paymeTransactionTotal;
-  @Json(name = "payme_transaction_card_brand") String paymeTransactionCardBrand;
-  @Json(name = "payme_transaction_auth_number") String paymeTransactionAuthNumber;
-  @Json(name = "buyer_name") String buyerName;
-  @Json(name = "buyer_email") String buyerEmail;
-  @Json(name = "buyer_phone") String buyerPhone;
-  @Json(name = "buyer_card_mask") String buyerCardMask;
-  @Json(name = "buyer_card_exp") String buyerCardExp;
-  @Json(name = "buyer_social_id") String buyerSocialId;
-  @Json(name = "installments") Integer installments;
-  @Json(name = "sale_paid_date") String salePaidDate;
-  @Json(name = "sale_release_date") String saleReleaseDate;
+  @Json(name = "status_code")
+  Integer statusCode;
+
+  @Json(name = "payme_status")
+  String paymeStatus;
+
+  @Json(name = "status_error_code")
+  Integer statusErrorCode;
+
+  @Json(name = "payme_sale_id")
+  String paymeSaleId;
+
+  @Json(name = "payme_sale_code")
+  Integer paymeSaleCode;
+
+  @Json(name = "sale_created")
+  String saleCreated;
+
+  @Json(name = "payme_sale_status")
+  String paymeSaleStatus;
+
+  @Json(name = "sale_status")
+  String saleStatus;
+
+  @Json(name = "currency")
+  String currency;
+
+  @Json(name = "transaction_id")
+  String transactionId;
+
+  @Json(name = "is_token_sale")
+  Boolean isTokenSale;
+
+  @Json(name = "price")
+  Integer price;
+
+  @Json(name = "payme_signature")
+  String paymeSignature;
+
+  @Json(name = "payme_transaction_id")
+  String paymeTransactionId;
+
+  @Json(name = "payme_transaction_total")
+  String paymeTransactionTotal;
+
+  @Json(name = "payme_transaction_card_brand")
+  String paymeTransactionCardBrand;
+
+  @Json(name = "payme_transaction_auth_number")
+  String paymeTransactionAuthNumber;
+
+  @Json(name = "buyer_name")
+  String buyerName;
+
+  @Json(name = "buyer_email")
+  String buyerEmail;
+
+  @Json(name = "buyer_phone")
+  String buyerPhone;
+
+  @Json(name = "buyer_card_mask")
+  String buyerCardMask;
+
+  @Json(name = "buyer_card_exp")
+  String buyerCardExp;
+
+  @Json(name = "buyer_social_id")
+  String buyerSocialId;
+
+  @Json(name = "installments")
+  Integer installments;
+
+  @Json(name = "sale_paid_date")
+  String salePaidDate;
+
+  @Json(name = "sale_release_date")
+  String saleReleaseDate;
 
   public Integer getStatusCode() {
     return statusCode;

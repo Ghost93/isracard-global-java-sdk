@@ -4,9 +4,7 @@ import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
-/**
- * Created by loiho on 5/10/16.
- */
+/** Created by loiho on 5/10/16. */
 public class PaySaleRequest {
 
   public String toJson(Moshi moshi) {
@@ -14,15 +12,32 @@ public class PaySaleRequest {
     return adapter.toJson(this);
   }
 
-  @Json(name = "payme_sale_id") String paymeSaleId;
-  @Json(name = "credit_card_number") String creditCardNumber;
-  @Json(name = "credit_card_cvv") String creditCardCVV;
-  @Json(name = "credit_card_exp") String creditCardExp;
-  @Json(name = "buyer_social_id") String buyerSocialID;
-  @Json(name = "buyer_name") String buyerName;
-  @Json(name = "buyer_phone") String buyerPhone;
-  @Json(name = "buyer_email") String buyerEmail;
-  @Json(name = "installments") String installments;
+  @Json(name = "payme_sale_id")
+  String paymeSaleId;
+
+  @Json(name = "credit_card_number")
+  String creditCardNumber;
+
+  @Json(name = "credit_card_cvv")
+  String creditCardCVV;
+
+  @Json(name = "credit_card_exp")
+  String creditCardExp;
+
+  @Json(name = "buyer_social_id")
+  String buyerSocialID;
+
+  @Json(name = "buyer_name")
+  String buyerName;
+
+  @Json(name = "buyer_phone")
+  String buyerPhone;
+
+  @Json(name = "buyer_email")
+  String buyerEmail;
+
+  @Json(name = "installments")
+  String installments;
 
   public String getPaymeSaleId() {
     return paymeSaleId;

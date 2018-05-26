@@ -21,6 +21,8 @@ import com.paymeservice.android.model.Settings;
 import com.squareup.moshi.Moshi;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -53,7 +55,7 @@ public class PayMe {
   private Settings settings;
   private OkHttpClient client;
   private Moshi moshi;
-  private final Handler mHandler = new Handler(Looper.getMainLooper());
+  private Executor mExecutor;
 
   PayMe(Settings settings) {
     this.settings = settings;
@@ -66,6 +68,8 @@ public class PayMe {
     } else {
       client = new OkHttpClient();
     }
+
+    mExecutor = Executors.newSingleThreadExecutor();
   }
 
   /**
@@ -257,7 +261,7 @@ public class PayMe {
   }
 
   private static void runOnUIThread(Runnable runnable) {
-    INSTANCE.mHandler.post(runnable);
+    INSTANCE.mExecutor.execute(runnable);
   }
 
   /**

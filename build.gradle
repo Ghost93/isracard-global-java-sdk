@@ -18,10 +18,24 @@ android {
     }
 }*/
 
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
     compile group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '3.2.0'
     compile group: 'com.squareup.moshi', name: 'moshi', version: '1.1.0'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.2.0'
     compile group: 'com.squareup.okio', name: 'okio', version: '1.8.0'
  //   compile 'com.android.support:support-annotations:25.3.1'
+}
+
+jar {
+    baseName = 'payme-java-sdk'
+    version =  '1.1.6'
 }

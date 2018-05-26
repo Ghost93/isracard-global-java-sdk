@@ -6,7 +6,6 @@ import com.squareup.moshi.Moshi;
 import java.io.IOException;
 
 /** Created by grang on 14/09/2017. */
-@Keep
 public class SaleFeesItem {
   public static SaleFeesItem fromJson(Moshi moshi, String json) throws IOException {
     JsonAdapter<SaleFeesItem> adapter = moshi.adapter(SaleFeesItem.class);
